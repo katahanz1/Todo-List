@@ -1,4 +1,4 @@
-import {useMemo, useState} from "react"
+import {useMemo, useState, useEffect} from "react"
 import styled from 'styled-components';
 import Text from './Components/Input/Index';
 import Task from "./Components/Task/Index";
@@ -12,7 +12,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   width: auto;
-  left: 325px;
+  left: 250px;
   padding-top: 3.3rem;
 
 `
@@ -44,11 +44,19 @@ function App() {
     {value: "Low", label: "Low"},
 ]
   
+  useEffect(() => {
+    const storedTasks = JSON.parse(window.localStorage.getItem("tasks"));
+    if (storedTasks) {
+      setTasks(storedTasks);
+    }
+  }, []);
 
   const createTask = (todo, priority) =>
   {
-    setTasks([...tasks, {id: uuidv4(), task: todo, completed: false, priority: priority}]);
-  
+    const newTask = {id: uuidv4(), task: todo, completed: false, priority: priority}
+    setTasks([...tasks, newTask]);
+    
+    window.localStorage.setItem("tasks", JSON.stringify([...tasks, newTask]))
   }
 
   const sortedTasks = useMemo(() => {
@@ -63,15 +71,17 @@ function App() {
     return [...highPriorityTasks, ...mediumPriorityTasks, ...lowPriorityTasks, ...highPriorityTasksCompleted, ...mediumPriorityTasksCompleted, ...lowPriorityTasksCompleted];
   }, [tasks]);
 
-  const handleComplete = (id) =>
-  {
-    setTasks(tasks.map(task => task.id === id ? {...task, completed: !task.completed} : task))
-  }
+  const handleComplete = (id) => {
+    const updatedTasks = tasks.map(task => task.id === id ? {...task, completed: !task.completed} : task);
+    setTasks(updatedTasks);
+    window.localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  };
+  
 
   const handleDelete = (id) =>
   {
     setTasks(tasks.filter(task => task.id !== id))
-    console.log("eliminando")
+    window.localStorage.setItem("tasks", JSON.stringify([...tasks.filter(task => task.id !== id)]));
   }
 
 

@@ -71,7 +71,7 @@ const Text = ({createTask, options}) => {
         <Container onSubmit={handleSubmit}>
             <Input required  value={text} onChange={handleChange} placeholder="Make dinner..."></Input>
             <Select required={true} value={option} onChange={handleSelection} >
-                <option value="" disabled>Seleccione grado de urgencia</option>
+                <option value="" disabled>select a degree of urgency</option>
                 {options.map((opcion, i) => (
                     <option key={i} value={opcion.value}>
                 {opcion.label}
