@@ -12,24 +12,28 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   width: auto;
-  left: 250px;
-  padding-top: 3.3rem;
-
+  padding-top: 1rem;  
+  font-family: "roboto";
 `
+
+const Title = styled.h1`
+  padding-bottom: .5rem;
+  color: white;
+`
+
 const Top = styled.div`
-  display: flex;
-  padding: 3rem;
-  background-color: #A99A9F;
+  padding: 2rem;
+  background-color: #9f75ff;
   border-radius: 5px 5px 0 0px;
-  
+
+ 
 `
 
 const TaskCotainer = styled.div`
   min-height: 0%;
   max-height: 500px;
   width: 100%;
-  
-  
+  color: black;
 `
 
 
@@ -87,6 +91,7 @@ function App() {
 
   return (
     <Container>
+      <Title>Todo List</Title>
       <Top>
         <Text createTask={createTask} options={options}/>
       </Top>

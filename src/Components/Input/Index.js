@@ -7,9 +7,9 @@ const Container = styled.form`
 `
 
 const Input = styled.input`
-    width: 500px;
+    width: 350px;
     height: 60px;
-    background-color: #fff;
+    background-color: #ebe5ff;
     border: none;
     outline: none;
     border-radius: 7px;
@@ -20,7 +20,7 @@ const Button = styled.button`
     width: 100px;
     border: none;
     border-radius: 7px;
-    background-color: lightblue;
+    background-color: #ebe5ff;
     font-size: medium;
     cursor: pointer;
     
@@ -37,6 +37,7 @@ const Select = styled.select`
     height: 60px;
     padding: 6px;
     border-radius: 7px;
+    background-color: #ebe5ff;
     
 `
 
@@ -71,7 +72,7 @@ const Text = ({createTask, options}) => {
         <Container onSubmit={handleSubmit}>
             <Input required  value={text} onChange={handleChange} placeholder="Make dinner..."></Input>
             <Select required={true} value={option} onChange={handleSelection} >
-                <option value="" disabled>select a degree of urgency</option>
+                <option value="" disabled>Priority</option>
                 {options.map((opcion, i) => (
                     <option key={i} value={opcion.value}>
                 {opcion.label}
